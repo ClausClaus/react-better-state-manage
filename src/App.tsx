@@ -20,7 +20,7 @@ const App: React.FC = () => {
     };
     return (
         <div>
-            <figure className="dog">
+            <figure className="dog" onDoubleClick={fetchDog}>
                 {dog && <img src={dog} alt="doggo" />}
             </figure>
             <button disabled={isLoading} onClick={fetchDog}>
