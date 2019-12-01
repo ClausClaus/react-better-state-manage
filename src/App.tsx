@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    const [isLoading, setIsLoading] = useState(false);
+    const [dog, setDog] = useState<null | string>(null);
+    const fetchDog = () => {
+        setIsLoading(true);
+        fetch(`https://dog.ceo/api/breeds/image/random`)
+            .then(data => data.json())
+            .then(response => {
+                setDog(response.message);
+                setIsLoading(false);
+            });
+    };
+    return (
+        <div>
+            <figure className="dog">
+                {dog && <img src={dog} alt="doggo" />}
+            </figure>
+            <button disabled={isLoading} onClick={fetchDog}>
+                {isLoading ? 'Fetching...' : 'Fetch dog!'}
+            </button>
+        </div>
+    );
+};
 
 export default App;
