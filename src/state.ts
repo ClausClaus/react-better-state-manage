@@ -1,26 +1,26 @@
 export function dogReducer(state: any, event: any) {
   switch (event.type) {
-    case "FETCH":
+    case 'FETCH':
       return {
         ...state,
-        status: "loading"
+        status: 'loading'
       };
-    case "RESOLVE":
+    case 'RESOLVE':
       return {
         ...state,
-        status: "success",
+        status: 'success',
         dog: event.data.message
       };
-    case "REJECT":
+    case 'REJECT':
       return {
         ...state,
-        status: "failure",
+        status: 'failure',
         error: event.error
       };
-    case "CANCEL":
+    case 'CANCEL':
       return {
         ...state,
-        status: "idle"
+        status: 'idle'
       };
     default:
       return state;
@@ -28,7 +28,7 @@ export function dogReducer(state: any, event: any) {
 }
 
 export const initialState = {
-  status: "idle",
+  status: 'idle',
   dog: null,
   error: null
 };
